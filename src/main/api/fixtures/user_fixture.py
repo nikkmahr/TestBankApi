@@ -1,0 +1,10 @@
+import pytest
+from src.main.api.models.create_user_request import CreateUserRequest
+from src.main.api.generators.model_generator import RandomModelGenerator
+
+# Эта фикстура будет формировать запрос создания пользователя и отдвать данные
+@pytest.fixture
+def created_user(api_manager):
+    user_request = RandomModelGenerator.generate(CreateUserRequest)
+    api_manager.admin_steps.create_user(user_request)
+    return user_request
